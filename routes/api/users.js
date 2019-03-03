@@ -28,14 +28,14 @@ router.post('/register', (req, res) => {
                 return res.status(400).json({ email: "There is an account registered with this email" });
             }
         });
-    
+    // Create new user if all is validated
     const newUser = new User({
         name: req.body.name,
         email: req.body.email,
         password: req.body.password
         });
 
-    // hashing password before storing to database
+    // Hashing password before storing to database
     bcrypt.genSalt(10, (e, salt) => {
         bcrypt.hash(newUser.password, salt, (e, hash) => {
             if (e) throw e;
